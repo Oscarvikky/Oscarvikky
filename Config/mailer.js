@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const sendMail = async (FullName, Email)=>{
+const sendMail = async (FullName, Email, res,)=>{
     const contactTemplate = `<div>
     <div>
       <h2 style="color: #00a859;">Welcome to Stackplus Technology</h2>
@@ -44,10 +44,10 @@ const mailOptions={
 };
    try {
      await transporter.sendMail(mailOptions)
-    res.status(200).send({message: "email sent successfully"})
+    // res.status(200).send({message : "email sent successfully"})
     
    } catch (error) {
-    res.status(500).send({message: "serval internal error"})
+    // res.status(500).send({message : "internal server error"})
    }
 
 }

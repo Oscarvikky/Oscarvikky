@@ -7,7 +7,10 @@ const connectDb = require("./Config/dbConnnect")
  const cors= require("cors")
 const ErrorHandler = require("./Middleware/ErrorHandler")
 
+
+
  app.use(express.json())
+ app.use(express.urlencoded({extended:true}))
  app.use(cors({origin: "*"}))
  app.use(ErrorHandler)
 

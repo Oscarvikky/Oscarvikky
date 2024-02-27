@@ -100,17 +100,17 @@ const EditAcc = async (req, res) => {
 
       const newuser = await UserModel.findOneAndUpdate({ Email: user.Email }, { FullName, Email, Password: HashPassword }, { new: true });
       if (newuser) {
-      //   let SecretKey = process.env.JWT_SECRET
-      // const generatetoken = jwt.sign({
-      //   user: {
-      //     FullName: newuser.FullName,
-      //     Email: newuser.Email,
-      //   },
+        let SecretKey = process.env.JWT_SECRET
+      const generatetoken = jwt.sign({
+        user: {
+          FullName: newuser.FullName,
+          Email: newuser.Email,
+        },
 
-      // },
-      //   SecretKey,
-      //   { expiresIn: "1d" }
-      // )
+      },
+        SecretKey,
+        { expiresIn: "1d" }
+      )
         res.status(200).send({ message: "user updated sucessfully", generatetoken, status:"success" })
         console.log(newuser)
       } else {
@@ -126,13 +126,14 @@ const EditAcc = async (req, res) => {
 };
 const getCurrentUser = async (req, res) => {
   const user = req.user;
-  console.log(user)
+  console.log('user : ', user)
   try {
     const fetchCurrentUser = await UserModel.findOne({Email: user.Email });
     if (fetchCurrentUser) {
       const userDetails = {
         FullName: fetchCurrentUser.FullName,
         Email: fetchCurrentUser.Email,
+        Password: fetchCurrentUser.Password
       };
       res.status(200).send({ message: "User userDetails", userDetails });
     }
@@ -166,7 +167,7 @@ const Delete = async (req, res) => {
   const deleteuser = await UserModel.findOneAndDelete({Email: user.Email})
   if (deleteuser) {
     console.log(deleteuser)
-    res.status(400).send({ message: "account deleted suceessfully"})
+    res.status(400).send({ message: "account deleted suceessfully" , status: true})
   } else {
     res.status(400).send({ message: "user is not found" })
   }
