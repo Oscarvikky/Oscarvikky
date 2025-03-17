@@ -14,7 +14,7 @@ app.use(ErrorHandler);
 
 //  console.log("working free")
 app.get((req, res) => {
-  app.send("welcome to dashboard");
+  res.send("welcome to dashboard");
 });
 connectDb();
 app.use("/Api/Users", UserRouter);
