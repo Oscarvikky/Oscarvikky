@@ -141,12 +141,14 @@ const newcollection = async (req, res) => {
 
 const popular_in_Women = async (req, res) => {
   try {
-    let women = await productModel.find({ category: "women" }).limit(4);
+    let women = await productModel.find({ ProductCategory: "women" }).limit(4);
     //   let popular_in_women = women.slice(0, 4);
-    console.log("popular in women fecteh");
+    if (!women) {
+      res.status(404).send({ message: "no product found" });
+    } else console.log("popular in women fecthed");
     res.status(200).send(women);
   } catch (error) {
-    console.error("error fecting popular in women:", error);
+    console.error("error fecthing popular in women:", error);
     res.status(500).json({ error: "failed" });
   }
 };
