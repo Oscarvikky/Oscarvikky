@@ -13,8 +13,8 @@ const ErrorHandler = (err, req, res, next) =>{
             case 500:
                 res.send({message: err.message, status: false, title:"server error"})
     default:
-        console.log("no errors working tree clean")
+        // console.log("no errors working tree clean")
         break;
  }
 }
-module.exports=ErrorHandler
+module.exports = ErrorHandler
