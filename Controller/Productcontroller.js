@@ -13,11 +13,11 @@ const createProduct = async (req, res) => {
   } = req.body;
 
   if (
-    (!ProductName,
-    !ProductPrice,
-    !ProductDescription,
-    !ProductImage,
-    !ProductCategory)
+    !ProductName ||
+    !ProductPrice ||
+    !ProductDescription ||
+    !ProductImage ||
+    !ProductCategory
   ) {
     res.status(400).send({ message: "all fileds are mandatory" });
   } else {
@@ -141,7 +141,7 @@ const newcollection = async (req, res) => {
 
 const popular_in_Women = async (req, res) => {
   try {
-    let women = await productModel.find({ ProductCategory: "women" }).limit(4);
+    let women = await productModel.find({ ProductCategory: "women" }).limit(8);
     //   let popular_in_women = women.slice(0, 4);
     if (!women) {
       res.status(404).send({ message: "no product found" });
